@@ -11,5 +11,12 @@
     "16": "./icon-16.png",
     "48": "./icon-48.png",
     "128": "./icon-128.png"
-  }
+  },
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["http://*.youtube.com/*", "https://*.youtube.com/*"],
+      "js": ["./static/js/content.js"]
+    }
+  ]
 }
