@@ -1,3 +1,8 @@
+import { css } from "./styles";
+import { getTimestampUrl, verifyVideoUrl } from "./helpers/url";
+
+console.log("url: ", verifyVideoUrl());
+
 const rootElement = document.getElementById("secondary-inner");
 const container = document.createElement("div");
 
@@ -40,7 +45,12 @@ function generateListHtml(data: any) {
   data.forEach((item: any) => {
     html += `
       <div>
-        <a href="">${item.timestamp}</a> - ${item.label}
+        <a href="${getTimestampUrl(
+          item.timestamp
+        )}" dir="auto" class="yt-simple-endpoint">
+          ${item.timestamp}
+        </a>
+        - ${item.label}
       </div>
     `;
   });
@@ -58,36 +68,8 @@ function mountList() {
 
   const html = generateListHtml(tempData);
 
-  const stylesheetCSS = `
-    #yt-setlist {
-      margin-bottom: 20px;
-      font-size: 16px;
-      border: 1px solid var(--yt-spec-10-percent-layer);
-      color: var(--yt-endpoint-color, var(--yt-spec-text-primary));
-    }
-
-    #yt-setlist h2 {
-      color: var(--yt-endpoint-color, var(--yt-spec-text-primary));
-    }
-
-    #yt-setlist .yts-header {
-      padding: 10px;
-      padding-left: 20px;
-      background-color: var(--yt-spec-brand-background-primary);
-    }
-
-    #yt-setlist .yts-list {
-      padding: 10px;
-      padding-left: 20px;
-    }
-
-    #yt-setlist .yts-list a {
-      color: var(--yt-endpoint-color, var(--yt-spec-call-to-action));
-    }
-  `;
-
   const stylesheet = document.createElement("style");
-  stylesheet.innerHTML = stylesheetCSS;
+  stylesheet.innerHTML = css;
 
   document.head.appendChild(stylesheet);
 
