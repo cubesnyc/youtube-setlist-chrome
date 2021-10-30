@@ -1,5 +1,6 @@
 import { css } from "./styles";
 import { generateListComponent } from "./helpers/html";
+import { getVideoId } from "./helpers/url";
 
 const tempData = [
   { timestamp: "1:24", label: "Don't Stay" },
@@ -30,8 +31,6 @@ function unmountList() {
 }
 
 function mountList() {
-  unmountList();
-
   const rootElement = document.getElementById("secondary-inner");
   const container = document.createElement("div");
 
@@ -47,6 +46,7 @@ function mountList() {
   rootElement?.prepend(container);
 }
 
+document.body.addEventListener("yt-navigate-start", unmountList);
 document.body.addEventListener("yt-navigate-finish", mountList);
 window.addEventListener("load", mountList);
 
