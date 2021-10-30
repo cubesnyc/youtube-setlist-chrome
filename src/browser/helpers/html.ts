@@ -8,9 +8,7 @@ export const generateTimestampList = (data: ITimestamp[]) => {
   data.forEach((item: any) => {
     html += `
       <div>
-        <a href="${getTimestampUrl(
-          item.timestamp
-        )}" dir="auto" class="yt-simple-endpoint">
+        <a href="${getTimestampUrl(item.timestamp)}" dir="auto" class="yt-simple-endpoint spf-link">
           ${item.timestamp}
         </a>
         - ${item.label}
