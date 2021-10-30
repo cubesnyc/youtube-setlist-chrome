@@ -1,15 +1,5 @@
 import { css } from "./styles";
-import { getTimestampUrl, verifyVideoUrl } from "./helpers/url";
-
-console.log("url: ", verifyVideoUrl());
-
-const rootElement = document.getElementById("secondary-inner");
-const container = document.createElement("div");
-
-function convertToSeconds(time: string): number {
-  const [minutes, seconds] = time.split(":").map(Number);
-  return minutes * 60 + seconds;
-}
+import { generateListComponent } from "./helpers/html";
 
 const tempData = [
   { timestamp: "1:24", label: "Don't Stay" },
@@ -39,52 +29,22 @@ function unmountList() {
   }
 }
 
-function generateListHtml(data: any) {
-  let html = `<table>`;
-
-  data.forEach((item: any) => {
-    html += `
-      <div>
-        <a href="${getTimestampUrl(
-          item.timestamp
-        )}" dir="auto" class="yt-simple-endpoint">
-          ${item.timestamp}
-        </a>
-        - ${item.label}
-      </div>
-    `;
-  });
-
-  html += `</table>`;
-
-  return html;
-}
-
 function mountList() {
   unmountList();
 
-  const el = document.createElement("div");
-  el.id = "yt-setlist";
+  const rootElement = document.getElementById("secondary-inner");
+  const container = document.createElement("div");
 
-  const html = generateListHtml(tempData);
+  container.id = "yt-setlist";
 
   const stylesheet = document.createElement("style");
   stylesheet.innerHTML = css;
 
+  const html = generateListComponent(tempData);
+
   document.head.appendChild(stylesheet);
-
-  el.innerHTML = `
-    <div>
-        <div class="yts-header">
-            <h2>YouTube Setlist</h2>
-        </div>
-        <div class="yts-list">
-          ${html}
-        </div>
-    </div>
-  `;
-
-  rootElement?.prepend(el);
+  container.innerHTML = generateListComponent(tempData);
+  rootElement?.prepend(container);
 }
 
 document.body.addEventListener("yt-navigate-finish", mountList);

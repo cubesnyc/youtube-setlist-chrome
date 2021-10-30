@@ -16,7 +16,6 @@ export const getVideoId = () => {
 };
 
 export const getTimestampUrl = (timestamp: string): string => {
-  let path = window.location.href.split("?")[0];
   let videoId = getVideoId();
 
   const [minutes, seconds] = timestamp.split(":");
