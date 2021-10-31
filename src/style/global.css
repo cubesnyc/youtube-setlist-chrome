@@ -1,4 +1,22 @@
+html,
 body {
-  height: 400px;
+  margin: 0;
+}
+
+body {
+  height: 600px;
   width: 600px;
+  background: #86a8e7;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a,
+a:visited {
+  color: #03a7e8;
 }
