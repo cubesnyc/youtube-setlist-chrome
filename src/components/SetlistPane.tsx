@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 
 import { Button } from "react-bootstrap";
-import { ClockLoader } from "react-spinners";
+import { v4 as uuidv4 } from "uuid";
 
 import { CenteredContainer } from "./CenteredContainer";
 import { EditSetList } from "./EditSetList";
 import { ErrorMessage } from "./ErrorMessage";
 import { Loading } from "./Loading";
-
-import { getVideoId } from "../browser/helpers/url";
 
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -30,7 +28,7 @@ export const SetlistPane = ({ videoUrl, pageTitle }: ISetListPaneProps) => {
 
   const createNewList = () => {
     setIsNew(true);
-    setData([{ timestamp: "0:00", label: "Intro" }]);
+    setData([{ timestamp: "0:00", label: "Intro", _id: uuidv4() }]);
   };
 
   useEffect(() => {

@@ -58,7 +58,7 @@ export const EditSetList = ({
   const [saveError, setSaveError] = useState(false);
 
   const newEntry = () => {
-    const newData = [...data, { timestamp: "", label: "", id: uuidv4() }];
+    const newData = [...data, { timestamp: "", label: "", _id: uuidv4() }];
     setData(newData);
   };
 
