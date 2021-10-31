@@ -6,13 +6,22 @@ import { ClockLoader } from "react-spinners";
 import { CenteredContainer } from "./CenteredContainer";
 import { EditSetList } from "./EditSetList";
 import { ErrorMessage } from "./ErrorMessage";
+import { Loading } from "./Loading";
+
+import { getVideoId } from "../browser/helpers/url";
 
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-import { ITimestamp } from "../interfaces/ITimestamp";
+interface ISetListPaneProps {
+  videoUrl: string;
+  pageTitle: string;
+}
 
-export const SetlistPane = () => {
-  const videoId = "7Mxg4VkkRRI";
+export const SetlistPane = ({ videoUrl, pageTitle }: ISetListPaneProps) => {
+  const queryStart = videoUrl.indexOf("?");
+  const queryStrings = videoUrl.substring(queryStart);
+  const params = new URLSearchParams(queryStrings);
+  const videoId = params.get("v") as string;
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -45,11 +54,7 @@ export const SetlistPane = () => {
   }, []);
 
   if (loading) {
-    return (
-      <CenteredContainer>
-        <ClockLoader size={50} color={"#123abc"} />
-      </CenteredContainer>
-    );
+    return <Loading />;
   }
 
   if (error) {
@@ -81,6 +86,7 @@ export const SetlistPane = () => {
       isNew={isNew}
       setIsNew={setIsNew}
       videoId={videoId}
+      pageTitle={pageTitle}
     />
   );
 };

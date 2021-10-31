@@ -12,7 +12,7 @@
     "48": "./icon-48.png",
     "128": "./icon-128.png"
   },
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "tabs"],
   "content_scripts": [
     {
       "matches": ["http://*.youtube.com/*", "https://*.youtube.com/*"],

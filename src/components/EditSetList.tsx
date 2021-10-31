@@ -13,6 +13,7 @@ interface IEditSetListProps {
   isNew: boolean;
   setIsNew: any;
   videoId: string;
+  pageTitle: string;
 }
 
 const FormGroup = styled(Form.Group)`
@@ -45,7 +46,14 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-export const EditSetList = ({ data, setData, isNew, setIsNew, videoId }: IEditSetListProps) => {
+export const EditSetList = ({
+  data,
+  setData,
+  isNew,
+  setIsNew,
+  videoId,
+  pageTitle,
+}: IEditSetListProps) => {
   const [isSaved, setIsSaved] = useState(false);
   const [saveError, setSaveError] = useState(false);
 
@@ -103,14 +111,27 @@ export const EditSetList = ({ data, setData, isNew, setIsNew, videoId }: IEditSe
     })
       .then(() => {
         setIsSaved(true);
+
+        if (isNew) {
+          setIsNew(false);
+        }
+
+        setTimeout(() => {
+          setIsSaved(false);
+        }, 1000);
       })
       .catch(() => {
         setSaveError(true);
+
+        setTimeout(() => {
+          setSaveError(false);
+        }, 1000);
       });
   };
 
   return (
     <div>
+      <div style={{ textAlign: "center", marginTop: "2em", fontWeight: 700 }}>{pageTitle}</div>
       <Form style={{ marginTop: "2em" }}>
         {data.map((item, index) => {
           return (
@@ -135,6 +156,8 @@ export const EditSetList = ({ data, setData, isNew, setIsNew, videoId }: IEditSe
             </FormGroup>
           );
         })}
+        {isSaved && <Alert variant="success">Saved!</Alert>}
+        {saveError && <Alert variant="danger">Error!</Alert>}
         <ButtonWrapper>
           <Button variant="warning" onClick={newEntry}>
             +
@@ -143,8 +166,6 @@ export const EditSetList = ({ data, setData, isNew, setIsNew, videoId }: IEditSe
             Save
           </Button>
         </ButtonWrapper>
-        {isSaved && <Alert variant="success">Saved!</Alert>}
-        {saveError && <Alert variant="danger">Error!</Alert>}
       </Form>
     </div>
   );
