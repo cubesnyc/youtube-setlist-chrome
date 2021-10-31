@@ -1,7 +1,6 @@
-import React from "react";
-
 import styled from "styled-components";
 
+import { MainPanel } from "./components/MainPanel";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 
@@ -27,7 +26,9 @@ function App() {
   return (
     <AppWrapper>
       <Header />
-      <Content>Test</Content>
+      <Content>
+        <MainPanel />
+      </Content>
       <Footer />
     </AppWrapper>
   );
