@@ -1,3 +1,5 @@
+import { timestampToSeconds } from "./time";
+
 export const verifyVideoUrl = () => {
   const url = window.location.href;
 
@@ -18,8 +20,5 @@ export const getVideoId = () => {
 export const getTimestampUrl = (timestamp: string): string => {
   let videoId = getVideoId();
 
-  const [minutes, seconds] = timestamp.split(":");
-  const secondsTotal = parseInt(minutes) * 60 + parseInt(seconds);
-
-  return `/watch?v=${videoId}&t=${secondsTotal}`;
+  return `/watch?v=${videoId}&t=${timestampToSeconds(timestamp)}`;
 };
