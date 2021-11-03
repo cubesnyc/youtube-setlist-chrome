@@ -1,7 +1,7 @@
 {
   "name": "YouTube Setlist",
   "description": "A community driven project to add annotated setlists to live concerts on YouTube",
-  "version": "1.1.1",
+  "version": "1.2",
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
