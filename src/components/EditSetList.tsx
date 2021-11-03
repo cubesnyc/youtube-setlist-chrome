@@ -140,14 +140,14 @@ export const EditSetList = ({
                 type="text"
                 id={`timestamp_${item._id}`}
                 value={item.timestamp}
-                placeholder="Enter email"
+                placeholder="Enter Timestamp"
                 onChange={(e) => handleChange(e, item._id)}
               />
               <Form.Control
                 type="text"
                 id={`label_${item._id}`}
                 value={item.label}
-                placeholder="Enter email"
+                placeholder="Enter Label"
                 onChange={(e) => handleChange(e, item._id)}
               />
               <Button variant="danger" onClick={() => removeEntry(item._id)}>
