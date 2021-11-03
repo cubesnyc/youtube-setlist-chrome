@@ -25,6 +25,10 @@ const mountList = async () => {
   stylesheet.innerHTML = css;
 
   document.head.appendChild(stylesheet);
+
+  const checkNode = document.getElementById("yt-setlist");
+  if (checkNode) return;
+
   container.innerHTML = html;
   rootElement?.prepend(container);
 };
